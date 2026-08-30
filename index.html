@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menaga Senraya Perumal — Software QA Engineer</title>
+<meta name="description" content="Menaga Senraya Perumal — Software QA Engineer specializing in automation and manual testing across healthcare, insurance, and eCommerce.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --ink:        #10161d;
+    --navy:       #1c2b39;
+    --slate:      #5c6b7a;
+    --slate-soft: #8b97a3;
+    --hairline:   #e1e6ea;
+    --paper:      #ffffff;
+    --panel:      #f5f7f9;
+    --accent:     #2f6f5e;
+    --accent-soft:#e7f0ed;
+    --accent-ink: #1f4d40;
+
+    --display: 'Space Grotesk', sans-serif;
+    --body: 'Inter', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    *{ animation-duration:0.001ms !important; transition-duration:0.001ms !important; }
+  }
+
+  body{
+    font-family:var(--body);
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{ color:inherit; }
+  :focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
+
+  .wrap{ max-width:1040px; margin:0 auto; padding:0 28px; }
+
+  /* ---------- NAV ---------- */
+  header.site-nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(255,255,255,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--hairline);
+  }
+  .nav-inner{
+    max-width:1040px; margin:0 auto; padding:16px 28px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .nav-mark{
+    font-family:var(--mono); font-size:14px; font-weight:600;
+    letter-spacing:0.02em; color:var(--navy); text-decoration:none;
+  }
+  .nav-mark span{ color:var(--accent); }
+  nav.links{ display:flex; gap:28px; list-style:none; }
+  nav.links a{
+    font-size:14px; font-weight:500; text-decoration:none; color:var(--slate);
+    transition:color .15s ease;
+  }
+  nav.links a:hover{ color:var(--ink); }
+  .nav-cta{
+    font-family:var(--mono); font-size:13px; font-weight:500;
+    padding:9px 16px; border:1px solid var(--navy); border-radius:3px;
+    text-decoration:none; color:var(--navy); white-space:nowrap;
+    transition:all .15s ease;
+  }
+  .nav-cta:hover{ background:var(--navy); color:#fff; }
+  .menu-btn{ display:none; }
+
+  /* ---------- HERO ---------- */
+  .hero{ padding:76px 0 0; }
+  .hero-grid{
+    display:grid; grid-template-columns:1fr auto; gap:48px; align-items:start;
+  }
+  .eyebrow{
+    font-family:var(--mono); font-size:12.5px; letter-spacing:0.08em;
+    text-transform:uppercase; color:var(--accent); font-weight:600;
+    display:flex; align-items:center; gap:8px; margin-bottom:18px;
+  }
+  .eyebrow::before{
+    content:''; width:7px; height:7px; border-radius:50%;
+    background:var(--accent); display:inline-block;
+    box-shadow:0 0 0 3px var(--accent-soft);
+  }
+  h1{
+    font-family:var(--display); font-weight:700;
+    font-size:clamp(34px, 5vw, 52px); line-height:1.08;
+    color:var(--navy); letter-spacing:-0.01em;
+  }
+  .role{
+    font-family:var(--body); font-size:clamp(16px,2vw,19px);
+    color:var(--slate); margin-top:12px; font-weight:500;
+  }
+  .summary{
+    margin-top:22px; max-width:560px; color:#3a4552; font-size:15.5px;
+  }
+  .hero-actions{ display:flex; flex-wrap:wrap; gap:12px; margin-top:30px; }
+  .btn{
+    font-size:14px; font-weight:600; text-decoration:none; padding:12px 20px;
+    border-radius:3px; display:inline-flex; align-items:center; gap:8px;
+    transition:all .15s ease; border:1px solid transparent;
+  }
+  .btn-primary{ background:var(--navy); color:#fff; }
+  .btn-primary:hover{ background:#0f1c27; }
+  .btn-secondary{ background:transparent; color:var(--navy); border-color:var(--hairline); }
+  .btn-secondary:hover{ border-color:var(--navy); }
+
+  .photo-frame{
+    width:172px; height:172px; border-radius:6px; overflow:hidden;
+    background:var(--panel); border:1px solid var(--hairline);
+    display:flex; align-items:center; justify-content:center;
+    position:relative; flex-shrink:0;
+  }
+  .photo-frame img{
+    width:100%; height:100%; object-fit:cover; display:block;
+  }
+  .photo-fallback{
+    font-family:var(--display); font-weight:700; font-size:44px;
+    color:var(--navy); opacity:0.35;
+  }
+
+  /* ---------- STATUS BAR (signature element) ---------- */
+  .status-bar{
+    margin:52px 0 0; background:var(--navy); border-radius:6px;
+    overflow:hidden; font-family:var(--mono);
+  }
+  .status-bar-head{
+    display:flex; align-items:center; gap:8px;
+    padding:10px 18px; background:#152230; font-size:12px; color:#7d8b98;
+  }
+  .status-bar-head .dot{ width:8px; height:8px; border-radius:50%; background:#3a4a58; }
+  .status-bar-head .label{ margin-left:6px; letter-spacing:0.04em; }
+  .status-grid{
+    display:grid; grid-template-columns:repeat(4,1fr);
+    padding:22px 18px 26px;
+  }
+  .status-item{ padding:0 18px; border-left:1px solid #2a3947; }
+  .status-item:first-child{ border-left:none; }
+  .status-check{ color:#5fd9a4; font-size:13px; margin-bottom:8px; }
+  .status-num{ font-size:24px; font-weight:600; color:#fff; }
+  .status-caption{ font-size:11.5px; color:#8797a5; margin-top:5px; }
+
+  /* ---------- SECTIONS ---------- */
+  section{ padding:64px 0; border-top:1px solid var(--hairline); }
+  .section-head{ display:flex; align-items:baseline; gap:14px; margin-bottom:32px; }
+  .section-tag{
+    font-family:var(--mono); font-size:12px; color:var(--slate-soft);
+    letter-spacing:0.05em;
+  }
+  h2{
+    font-family:var(--display); font-size:26px; font-weight:600;
+    color:var(--navy); letter-spacing:-0.01em;
+  }
+
+  /* Skills */
+  .skills-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:28px 40px; }
+  .skill-group h3{
+    font-family:var(--mono); font-size:12.5px; text-transform:uppercase;
+    letter-spacing:0.05em; color:var(--accent-ink); margin-bottom:12px; font-weight:600;
+  }
+  .pill-row{ display:flex; flex-wrap:wrap; gap:8px; }
+  .pill{
+    font-family:var(--mono); font-size:12.5px; padding:6px 11px;
+    background:var(--panel); border:1px solid var(--hairline); border-radius:3px;
+    color:#2a3541;
+  }
+
+  /* Experience */
+  .job{ padding:28px 0; border-bottom:1px solid var(--hairline); }
+  .job:last-child{ border-bottom:none; padding-bottom:0; }
+  .job:first-child{ padding-top:0; }
+  .job-head{
+    display:flex; justify-content:space-between; align-items:baseline;
+    flex-wrap:wrap; gap:8px 20px; margin-bottom:6px;
+  }
+  .job-title{ font-family:var(--display); font-size:18px; font-weight:600; color:var(--navy); }
+  .job-org{ color:var(--accent-ink); font-weight:500; }
+  .job-dates{ font-family:var(--mono); font-size:12.5px; color:var(--slate-soft); white-space:nowrap; }
+  .job-context{ font-size:14px; color:var(--slate); font-style:italic; margin:8px 0 14px; max-width:680px; }
+  .job ul{ list-style:none; display:flex; flex-direction:column; gap:9px; }
+  .job li{
+    font-size:14.5px; color:#2c3844; padding-left:18px; position:relative;
+  }
+  .job li::before{
+    content:'—'; position:absolute; left:0; color:var(--accent); font-weight:600;
+  }
+  .tech-line{
+    margin-top:16px; font-family:var(--mono); font-size:12px; color:var(--slate);
+    padding-top:14px; border-top:1px dashed var(--hairline);
+  }
+  .tech-line b{ color:var(--navy); font-weight:600; }
+
+  /* Two column: education/certs + leadership */
+  .two-col{ display:grid; grid-template-columns:1fr 1fr; gap:48px; }
+  .cert-list{ list-style:none; display:flex; flex-direction:column; gap:16px; }
+  .cert-list li{ font-size:14.5px; padding-left:0; }
+  .cert-name{ font-weight:600; color:var(--navy); display:block; }
+  .cert-id{ font-family:var(--mono); font-size:12px; color:var(--slate-soft); }
+
+  .edu-block{ margin-bottom:26px; }
+  .edu-degree{ font-weight:600; color:var(--navy); font-size:15px; }
+  .edu-school{ color:var(--slate); font-size:14px; margin-top:2px; }
+
+  .lead-org{ font-family:var(--mono); font-size:12px; color:var(--slate-soft); margin-bottom:4px; }
+
+  /* Contact / footer */
+  .contact-section{ border-top:1px solid var(--hairline); background:var(--panel); }
+  .contact-grid{
+    display:grid; grid-template-columns:1fr auto; gap:32px; align-items:center;
+  }
+  .contact-grid h2{ margin-bottom:10px; }
+  .contact-sub{ color:var(--slate); font-size:15px; max-width:440px; }
+  .contact-links{ display:flex; flex-direction:column; gap:14px; align-items:flex-end; }
+  .contact-link{
+    display:flex; align-items:center; gap:10px; text-decoration:none;
+    font-family:var(--mono); font-size:14px; color:var(--navy);
+  }
+  .contact-link .k{ color:var(--slate-soft); }
+  .contact-link:hover{ color:var(--accent); }
+
+  footer{
+    padding:26px 0; text-align:center; font-size:12.5px; color:var(--slate-soft);
+    font-family:var(--mono);
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:760px){
+    nav.links{
+      position:fixed; top:64px; left:0; right:0; bottom:0;
+      background:#fff; flex-direction:column; padding:24px 28px; gap:6px;
+      transform:translateX(100%); transition:transform .25s ease;
+    }
+    nav.links.open{ transform:translateX(0); }
+    nav.links a{ padding:14px 0; border-bottom:1px solid var(--hairline); font-size:16px; }
+    .menu-btn{
+      display:block; background:none; border:1px solid var(--hairline);
+      border-radius:3px; padding:8px 10px; font-size:16px; cursor:pointer;
+    }
+    .hero-grid{ grid-template-columns:1fr; }
+    .photo-frame{ order:-1; width:100px; height:100px; }
+    .status-grid{ grid-template-columns:1fr 1fr; row-gap:22px; }
+    .status-item:nth-child(3){ border-left:none; }
+    .skills-grid{ grid-template-columns:1fr; }
+    .two-col{ grid-template-columns:1fr; }
+    .job-head{ flex-direction:column; align-items:flex-start; }
+    .contact-grid{ grid-template-columns:1fr; }
+    .contact-links{ align-items:flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="nav-inner">
+    <a href="#top" class="nav-mark">msp<span>.</span>dev</a>
+    <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    <nav class="links" id="navLinks">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#background">Background</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a href="#contact" class="nav-cta">Get in touch</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero" style="border-top:none;" id="about">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow">Open to opportunities</div>
+          <h1>Menaga Senraya&nbsp;Perumal</h1>
+          <p class="role">Software QA Engineer — Automation &amp; Manual Testing</p>
+          <p class="summary">
+            5+ years of experience testing web and mobile applications across healthcare, insurance,
+            and eCommerce. Strong grounding in SDLC, STLC, and Agile/Scrum, with hands-on delivery
+            in Playwright, Selenium, API testing, SQL validation, and CI/CD pipelines.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="mailto:smenagaprabu@gmail.com">Email me</a>
+            <a class="btn btn-secondary" href="https://www.linkedin.com/in/menaga-senraya-perumal-0789a9232/" target="_blank" rel="noopener">LinkedIn ↗</a>
+            <a class="btn btn-secondary" href="https://github.com/menagaperumal?tab=repositories" target="_blank" rel="noopener">GitHub ↗</a>
+          </div>
+        </div>
+        <div class="photo-frame">
+          <img src="assets/photo.jpg" alt="Menaga Senraya Perumal" id="profilePhoto"
+               onerror="this.style.display='none'; document.getElementById('photoFallback').style.display='flex';">
+          <div class="photo-fallback" id="photoFallback" style="display:none;">MP</div>
+        </div>
+      </div>
+
+      <!-- Signature status bar -->
+      <div class="status-bar">
+        <div class="status-bar-head">
+          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          <span class="label">run · career-summary.spec</span>
+        </div>
+        <div class="status-grid">
+          <div class="status-item">
+            <div class="status-check">✓ pass</div>
+            <div class="status-num">5+ yrs</div>
+            <div class="status-caption">QA experience</div>
+          </div>
+          <div class="status-item">
+            <div class="status-check">✓ pass</div>
+            <div class="status-num">250+</div>
+            <div class="status-caption">test cases designed &amp; executed</div>
+          </div>
+          <div class="status-item">
+            <div class="status-check">✓ pass</div>
+            <div class="status-num">70+</div>
+            <div class="status-caption">defects tracked to resolution</div>
+          </div>
+          <div class="status-item">
+            <div class="status-check">✓ pass</div>
+            <div class="status-num">3</div>
+            <div class="status-caption">domains: health, finance, retail</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="section-tag">01</span>
+        <h2>Technical Skills</h2>
+      </div>
+      <div class="skills-grid">
+
+        <div class="skill-group">
+          <h3>Testing</h3>
+          <div class="pill-row">
+            <span class="pill">Functional</span><span class="pill">Regression</span>
+            <span class="pill">Smoke</span><span class="pill">Sanity</span>
+            <span class="pill">End-to-End</span><span class="pill">Cross-Browser</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <h3>Automation</h3>
+          <div class="pill-row">
+            <span class="pill">Playwright (TypeScript)</span><span class="pill">Selenium (Java)</span>
+            <span class="pill">TestNG</span><span class="pill">Page Object Model</span>
+            <span class="pill">Data-Driven Frameworks</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <h3>CI/CD &amp; DevOps</h3>
+          <div class="pill-row">
+            <span class="pill">Jenkins</span><span class="pill">GitHub Actions</span>
+            <span class="pill">Docker</span><span class="pill">Selenium Grid</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <h3>API &amp; Databases</h3>
+          <div class="pill-row">
+            <span class="pill">Postman</span><span class="pill">REST API Testing</span>
+            <span class="pill">SQL Validation</span><span class="pill">MySQL</span><span class="pill">PostgreSQL</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <h3>Mobile Testing</h3>
+          <div class="pill-row">
+            <span class="pill">Android Studio</span><span class="pill">Xcode</span>
+            <span class="pill">ADB</span><span class="pill">BrowserStack</span><span class="pill">Unix</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <h3>Test Management &amp; Version Control</h3>
+          <div class="pill-row">
+            <span class="pill">JIRA</span><span class="pill">Kiwi TCMS</span>
+            <span class="pill">TestRail</span><span class="pill">Git</span><span class="pill">GitHub</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="section-tag">02</span>
+        <h2>Professional Experience</h2>
+      </div>
+
+      <div class="job">
+        <div class="job-head">
+          <div>
+            <span class="job-title">QA Automation Engineer</span> —
+            <span class="job-org">Athena Health, Boston, MA</span>
+          </div>
+          <span class="job-dates">Jul 2025 — Present</span>
+        </div>
+        <p class="job-context">
+          Hospital Management System (e-HMS): an enterprise healthcare platform covering patient
+          registration, EMR/EHR, OPD/IPD workflows, billing, pharmacy, and reporting.
+        </p>
+        <ul>
+          <li>Developed Playwright (TypeScript) automation tests using the Page Object Model pattern.</li>
+          <li>Designed and executed 250+ manual and automated test cases across functional, regression, smoke, sanity, end-to-end, and cross-browser testing.</li>
+          <li>Automated critical end-to-end workflows spanning registration, EMR/EHR, billing, pharmacy, and reporting.</li>
+          <li>Integrated automated suites with Jenkins CI/CD pipelines for faster, more reliable releases.</li>
+          <li>Performed API testing in Postman and validated backend data integrity with MySQL/SQL queries.</li>
+          <li>Logged and tracked 70+ defects in JIRA, contributing to a measurable drop in production issues.</li>
+          <li>Managed test cases and results in Kiwi TCMS; collaborated cross-functionally via Slack and Agile ceremonies.</li>
+        </ul>
+        <div class="tech-line"><b>Stack:</b> Playwright · TypeScript · JavaScript · POM · JIRA · Kiwi TCMS · Postman · MySQL · Jenkins · Git · Slack · VS Code</div>
+      </div>
+
+      <div class="job">
+        <div class="job-head">
+          <div>
+            <span class="job-title">QA Engineer</span> —
+            <span class="job-org">One America Financial Partner, Indianapolis, IN</span>
+          </div>
+          <span class="job-dates">Sep 2023 — Jun 2025</span>
+        </div>
+        <p class="job-context">
+          Financial services platform spanning life insurance, employee benefits, long-term care
+          protection, and retirement/financial planning.
+        </p>
+        <ul>
+          <li>Built and maintained Selenium WebDriver automation scripts in Java for web applications.</li>
+          <li>Automated functional, regression, smoke, and end-to-end test scenarios.</li>
+          <li>Designed reusable, maintainable automation frameworks using Page Object Model.</li>
+          <li>Used TestNG, Maven, XPath, CSS selectors, and explicit waits across the framework.</li>
+          <li>Handled cross-browser testing, dynamic web elements, and synchronization issues.</li>
+          <li>Ran containerized, parallel test execution with Docker and Selenium Grid.</li>
+          <li>Integrated suites with Jenkins CI/CD; tracked and validated defects in JIRA with dev and QA teams.</li>
+        </ul>
+        <div class="tech-line"><b>Stack:</b> Java · Selenium WebDriver · TestNG · Maven · POM · Docker · Selenium Grid · Jenkins · Git · JIRA · XPath · CSS Selectors</div>
+      </div>
+
+      <div class="job">
+        <div class="job-head">
+          <div>
+            <span class="job-title">QA Analyst</span> —
+            <span class="job-org">Albertsons, Plano, TX</span>
+          </div>
+          <span class="job-dates">Jun 2021 — May 2023</span>
+        </div>
+        <p class="job-context">
+          Retail grocery platform supporting online shopping, pickup/delivery, customer accounts,
+          promotions, loyalty rewards, pharmacy, and store operations.
+        </p>
+        <ul>
+          <li>Executed functional, UI, smoke, and regression testing across web and mobile platforms.</li>
+          <li>Ran UI and usability testing to ensure consistent application behavior.</li>
+          <li>Logged defects in JIRA with severity, priority, repro steps, and expected/actual results.</li>
+          <li>Took part in test planning, execution, defect triage, and regression cycles within Agile/Scrum.</li>
+          <li>Partnered with developers and business analysts to validate fixes.</li>
+          <li>Ran cross-browser testing across Chrome, Firefox, Safari, and Edge.</li>
+        </ul>
+        <div class="tech-line"><b>Stack:</b> Manual Testing · TestRail · SQL · Postman · Chrome DevTools · Agile/Scrum · Git · Android Studio · Xcode · ADB · Unix · BrowserStack</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- BACKGROUND: education, certs, leadership -->
+  <section id="background">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="section-tag">03</span>
+        <h2>Background</h2>
+      </div>
+      <div class="two-col">
+        <div>
+          <div class="skill-group" style="margin-bottom:28px;">
+            <h3>Education</h3>
+            <div class="edu-block">
+              <div class="edu-degree">Master of Technology (MTech)</div>
+              <div class="edu-school">Bharathiyar University, Coimbatore, Tamil Nadu, India</div>
+            </div>
+          </div>
+          <div class="skill-group">
+            <h3>Certifications</h3>
+            <ul class="cert-list">
+              <li>
+                <span class="cert-name">ISTQB Agile Tester (CT-AT)</span>
+                <span class="cert-id">Credential ID: 25-CTFL-AT-00054-USA</span>
+              </li>
+              <li>
+                <span class="cert-name">ISTQB Certified Tester Foundation Level (CTFL)</span>
+                <span class="cert-id">Credential ID: 25-CTFL-00328-USA</span>
+              </li>
+              <li>
+                <span class="cert-name">AWS Certified AI Practitioner — Foundational</span>
+                <span class="cert-id">Issued November 2025</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div>
+          <div class="skill-group">
+            <h3>Leadership &amp; Volunteer</h3>
+            <div class="lead-org">Michigan Council of Women in Technology (MCWT)</div>
+            <div class="edu-degree" style="margin-bottom:4px;">First Round Judge — Girls Hack IT</div>
+            <div class="edu-school" style="margin-bottom:12px;">Dec 2025 — Present</div>
+            <ul style="list-style:none; display:flex; flex-direction:column; gap:9px;">
+              <li style="font-size:14.5px; padding-left:18px; position:relative;">
+                <span style="position:absolute; left:0; color:var(--accent); font-weight:600;">—</span>
+                Evaluated mobile apps built by middle and high school students using MIT App Inventor.
+              </li>
+              <li style="font-size:14.5px; padding-left:18px; position:relative;">
+                <span style="position:absolute; left:0; color:var(--accent); font-weight:600;">—</span>
+                Assessed functionality, usability, and innovation with constructive feedback.
+              </li>
+              <li style="font-size:14.5px; padding-left:18px; position:relative;">
+                <span style="position:absolute; left:0; color:var(--accent); font-weight:600;">—</span>
+                Supported young women in STEM, building problem-solving skills and confidence.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact-section" id="contact">
+    <div class="wrap">
+      <div class="contact-grid">
+        <div>
+          <h2>Let's talk</h2>
+          <p class="contact-sub">Open to QA Engineer and QA Automation Engineer roles. Reach out directly or connect on LinkedIn.</p>
+        </div>
+        <div class="contact-links">
+          <a class="contact-link" href="mailto:smenagaprabu@gmail.com"><span class="k">email</span> smenagaprabu@gmail.com</a>
+          <a class="contact-link" href="tel:+15173035508"><span class="k">phone</span> (517) 303-5508</a>
+          <a class="contact-link" href="https://www.linkedin.com/in/menaga-senraya-perumal-0789a9232/" target="_blank" rel="noopener"><span class="k">in</span> linkedin.com/in/menaga-senraya-perumal</a>
+          <a class="contact-link" href="https://github.com/menagaperumal?tab=repositories" target="_blank" rel="noopener"><span class="k">gh</span> github.com/menagaperumal</a>
+          <span class="contact-link"><span class="k">based</span> Michigan, USA</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>© 2026 Menaga Senraya Perumal · Built for hiring managers who read the whole page.</footer>
+
+<script>
+  const menuBtn = document.getElementById('menuBtn');
+  const navLinks = document.getElementById('navLinks');
+  menuBtn.addEventListener('click', () => {
+    const open = navLinks.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', open);
+  });
+  navLinks.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    });
+  });
+</script>
+
+</body>
+</html>
