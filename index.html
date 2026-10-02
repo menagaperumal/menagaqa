@@ -22,69 +22,7 @@
 
 
   
-<style>
-  :root{
-    --ink:        #14151a;
-    --paper:      #ffffff;
-    --panel:      #f7f8fc;
-    --hairline:   #e7e8f2;
-    --slate:      #5b6172;
-    --slate-soft: #9297a8;
 
-    --indigo:     #4f46e5;
-    --indigo-soft:#eeecfd;
-    --sky:        #0ea5e9;
-    --sky-soft:   #e3f4fc;
-    --emerald:    #10b981;
-    --emerald-soft:#e1f7ef;
-    --amber:      #f59e0b;
-    --amber-soft: #fef2dd;
-    --coral:      #f43f5e;
-    --coral-soft: #fde5e9;
-
-    --display: 'Space Grotesk', sans-serif;
-    --body: 'Inter', sans-serif;
-    --mono: 'JetBrains Mono', monospace;
-  }
-
-  *{ box-sizing:border-box; margin:0; padding:0; }
-  html{ scroll-behavior:smooth; }
-  @media (prefers-reduced-motion: reduce){
-    html{ scroll-behavior:auto; }
-    *{ animation-duration:0.001ms !important; transition-duration:0.001ms !important; }
-  }
-
-  body{
-    font-family:var(--body); color:var(--ink); background:var(--paper);
-    line-height:1.6; -webkit-font-smoothing:antialiased;
-  }
-  a{ color:inherit; }
-  :focus-visible{ outline:2px solid var(--indigo); outline-offset:3px; }
-  .wrap{ max-width:1040px; margin:0 auto; padding:0 28px; }
-
-  /* ---------- NAV ---------- */
-  header.site-nav{
-    position:sticky; top:0; z-index:50;
-    background:rgba(255,255,255,0.9); backdrop-filter:blur(8px);
-    border-bottom:1px solid var(--hairline);
-  }
-  .nav-inner{
-    max-width:1040px; margin:0 auto; padding:16px 28px;
-    display:flex; align-items:center; justify-content:space-between;
-  }
-  .nav-mark{
-    font-family:var(--mono); font-size:14px; font-weight:600;
-    letter-spacing:0.02em; color:var(--ink); text-decoration:none;
-  }
-  .nav-mark span{
-    background:linear-gradient(90deg,var(--indigo),var(--coral));
-    -webkit-background-clip:text; background-clip:text; color:transparent;
-  }
-  nav.links{ display:flex; gap:6px; list-style:none; }
-  nav.links a{
-    font-size:14px; font-weight:600; text-decoration:none;
-    padding:8px 14px; border-radius:99px; transition:all .15s ease;
-  }
   nav.links a:nth-child(1){ color:var(--indigo); }
   nav.links a:nth-child(1):hover{ background:var(--indigo-soft); }
   nav.links a:nth-child(2){ color:#0b7ea8; }
